@@ -63,10 +63,10 @@ namespace Library.Domain.Repositories
 
         public User UpdateUser(User user)
         {
-            var userup = GetUser(user.Id);
+            
             _libraryContext.Users.Update(user);
             _libraryContext.SaveChanges();
-            return userup;   
+            return user;   
         }
     }
 }
