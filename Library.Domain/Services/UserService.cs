@@ -1,4 +1,5 @@
-﻿using Core.Interfaces.Repositories;
+﻿using Core.Enums;
+using Core.Interfaces.Repositories;
 using Core.Interfaces.Services;
 using Core.Models;
 using System;
@@ -44,7 +45,16 @@ namespace Library.Domain.Services
 
         public User RegisterUser(User user)
         {
-            
+
+            user.LibraryIdentificationNumber = new Guid().ToString();
+            user.UserType = UserType.LibraryUser;
+            return _userRepository.AddUser(user);
+        }
+
+        public User RegisterLibrarian(User user)
+        {
+
+            user.LibrarianIdentificationNumber = new Guid().ToString();
             return _userRepository.AddUser(user);
         }
     }

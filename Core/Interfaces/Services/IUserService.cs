@@ -15,6 +15,8 @@ namespace Core.Interfaces.Services
 
         public User RegisterUser(User user);
 
+        public User RegisterLibrarian(User user);
+
         public IList<User> GetUsers();
 
         public User Login(string email, string password);

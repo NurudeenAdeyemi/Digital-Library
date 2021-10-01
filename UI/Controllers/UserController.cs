@@ -26,7 +26,24 @@ namespace UI.Controllers
             return View(users);
         }
 
+        public IActionResult AdminDashboard()
+        {
+            return View();
+        }
+
         [HttpGet]
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Register(User user)
+        {
+            _userService.RegisterUser(user);
+            return RedirectToAction("Index", "Home");
+        }
+
         public IActionResult Create()
         {
             return View();
@@ -35,8 +52,8 @@ namespace UI.Controllers
         [HttpPost]
         public IActionResult Create(User user)
         {
-            _userService.RegisterUser(user);
-            return View();
+            _userService.RegisterLibrarian(user);
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]
@@ -70,7 +87,7 @@ namespace UI.Controllers
             {
                 var claims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.Name, $"{user.FirstName}"),
+                    new Claim(ClaimTypes.Name, $"{user.FirstName} {user.LastName}"),
                     new Claim(ClaimTypes.GivenName, $"{user.FirstName} {user.LastName}"),
                     new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                     new Claim(ClaimTypes.Email, user.Email),
@@ -85,6 +102,10 @@ namespace UI.Controllers
                 if (userRole == "LibraryUser")
                 {
                     return RedirectToAction("Index", "Home");
+                }
+                if (userRole == "Librarian")
+                {
+                    return RedirectToAction("AdminDashboard", "User");
                 }
 
                 return RedirectToAction("Login", "User");

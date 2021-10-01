@@ -37,11 +37,20 @@ namespace Data.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("LibrarianIdentificationNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LibraryIdentificationNumber")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.Property<string>("University")
                         .HasColumnType("nvarchar(max)");

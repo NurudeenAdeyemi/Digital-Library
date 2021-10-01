@@ -22,6 +22,12 @@ namespace Core.Models
 
         public string University { get; set; }
 
+        public string LibraryIdentificationNumber { get; set; }
+
+        public string LibrarianIdentificationNumber { get; set; }
+
+        public AccountStatus Status { get; set; }
+
         public string PasswordHash { get; set; }
 
        // public string HashSalt { get; set; }
