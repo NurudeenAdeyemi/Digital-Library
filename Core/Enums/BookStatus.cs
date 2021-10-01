@@ -11,6 +11,6 @@ namespace Core.Enums
         AVAILABLE = 1,
         RESERVED,
         LOANED,
-        LOST
+    
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Core.Models
 {
-    public class Book
+    public class Book : BaseEntity
     {
          public string ISBN { get; set; }
          public string Title { get; set; }
@@ -15,13 +15,19 @@ namespace Core.Models
          public string Publisher { get; set; }
          public string Language { get; set; }
          public int NumberOfPages { get; set; }
-         public List<Author> Authors { get; set; } = new List<Author>();
+        
          public bool IsAvailable { get; set; }
-         public DateTime DateBorrowed { get; set; }
-        public DateTime DueDate { get; set; }
+
         public decimal Price { get; set; }
-        public BookStatus Status { get; set; }
-        public DateTime DateOfPurchase { get; set; }
+
+        public string BookImage { get; set; }
+
+        public string BookPDF { get; set; }
+        //public BookStatus Status { get; set; }
         public DateTime PublicationDate { get; set; }
+
+        public List<BookCategory> BookCategories { get; set; } = new List<BookCategory>();
+
+        public List<BookAuthor> BookAuthors { get; set; } = new List<BookAuthor>();
     }
 }

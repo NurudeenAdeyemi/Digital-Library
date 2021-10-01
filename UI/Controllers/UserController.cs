@@ -1,4 +1,5 @@
-﻿using Core.Enums;
+﻿using Core.DTOs;
+using Core.Enums;
 using Core.Interfaces.Services;
 using Core.Models;
 using Microsoft.AspNetCore.Authentication;
@@ -27,10 +28,49 @@ namespace UI.Controllers
             return View(users);
         }
         [HttpGet]
-        public IActionResult Details(string email)
+        public IActionResult Details(int id)
         {
-            var user = _userService.GetUserByEmail(email);
+            var user = _userService.GetUser(id);
             return View(user);
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var user = _userService.GetUser(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return View(user);
+
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            _userService.Delete(id);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var user = _userService.GetUser(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return View(user);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(int id, UserUpdateDTO model)
+        {
+            _userService.UpdateUser(id, model);
+            return RedirectToAction("Index");
         }
 
         public IActionResult AdminDashboard()
@@ -38,6 +78,7 @@ namespace UI.Controllers
             return View();
         }
 
+        
         [HttpGet]
         public IActionResult Register()
         {

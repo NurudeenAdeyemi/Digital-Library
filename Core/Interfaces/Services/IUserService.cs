@@ -1,4 +1,5 @@
-﻿using Core.Models;
+﻿using Core.DTOs;
+using Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,10 @@ namespace Core.Interfaces.Services
         public User GetUserByEmail(string email);
 
         public User RegisterUser(User user);
+
+        public User UpdateUser(int id, UserUpdateDTO model);
+
+        public void Delete(int id);
 
         public User RegisterLibrarian(User user);
 

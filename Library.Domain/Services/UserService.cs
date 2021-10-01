@@ -1,4 +1,5 @@
-﻿using Core.Enums;
+﻿using Core.DTOs;
+using Core.Enums;
 using Core.Interfaces.Repositories;
 using Core.Interfaces.Services;
 using Core.Models;
@@ -31,10 +32,10 @@ namespace Library.Domain.Services
         public User Login(string email, string password)
         {
             var user = _userRepository.GetUserByEmail(email);
-            if(user != null && user.PasswordHash == password )
+            if (user != null && user.PasswordHash == password)
             {
                 return user;
-            }  
+            }
             return null;
         }
 
@@ -57,5 +58,19 @@ namespace Library.Domain.Services
             user.LibrarianIdentificationNumber = new Guid().ToString();
             return _userRepository.AddUser(user);
         }
+
+        public void Delete(int id)
+        {
+            _userRepository.Delete(id);
+        }
+
+        public User UpdateUser(int id, UserUpdateDTO model)
+        {
+            var user = _userRepository.GetUser(id);
+            user.Status = model.Status;
+            user.UserType = model.UserType;
+            return _userRepository.UpdateUser(user);
+        }
     }
+
 }
