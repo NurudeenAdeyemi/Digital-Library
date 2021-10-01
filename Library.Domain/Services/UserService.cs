@@ -31,11 +31,11 @@ namespace Library.Domain.Services
         public User Login(string email, string password)
         {
             var user = _userRepository.GetUserByEmail(email);
-            if(user == null || user.PasswordHash != password)
+            if(user != null && user.PasswordHash == password )
             {
-                return null;
+                return user;
             }  
-            return user;
+            return null;
         }
 
         public IList<User> GetUsers()
@@ -45,7 +45,7 @@ namespace Library.Domain.Services
 
         public User RegisterUser(User user)
         {
-
+            user.Status = AccountStatus.ACTIVE;
             user.LibraryIdentificationNumber = new Guid().ToString();
             user.UserType = UserType.LibraryUser;
             return _userRepository.AddUser(user);

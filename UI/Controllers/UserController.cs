@@ -1,4 +1,5 @@
-﻿using Core.Interfaces.Services;
+﻿using Core.Enums;
+using Core.Interfaces.Services;
 using Core.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -81,6 +82,11 @@ namespace UI.Controllers
             if (user == null)
             {
                 ViewBag.Message = "Invalid Username/Password";
+                return View();
+            }
+            else if(user.Status != AccountStatus.ACTIVE)
+            {
+                ViewBag.Message = "Account Not Active";
                 return View();
             }
             else
