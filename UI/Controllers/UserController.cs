@@ -26,6 +26,12 @@ namespace UI.Controllers
             var users = _userService.GetUsers();
             return View(users);
         }
+        [HttpGet]
+        public IActionResult Details(string email)
+        {
+            var user = _userService.GetUserByEmail(email);
+            return View(user);
+        }
 
         public IActionResult AdminDashboard()
         {
