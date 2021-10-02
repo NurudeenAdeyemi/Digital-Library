@@ -19,9 +19,23 @@ namespace Library.Domain.Services
         {
             _userRepository = userRepository;
         }
-        public User GetUser(int id)
+        public UserModel GetUser(int id)
         {
-            return _userRepository.GetUser(id);
+            var user = _userRepository.GetUser(id);
+            return new UserModel
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                Status = user.Status,
+                UserType = user.UserType,
+                Country = user.Country,
+                LibrarianIdentificationNumber = user.LibrarianIdentificationNumber,
+                LibraryIdentificationNumber = user.LibraryIdentificationNumber,
+                PhoneNumber = user.PhoneNumber,
+                University = user.University
+            };
         }
 
         public User GetUserByEmail(string email)
@@ -44,18 +58,34 @@ namespace Library.Domain.Services
             return _userRepository.GetUsers();
         }
 
-        public User RegisterUser(User user)
+        public BaseResponse RegisterUser(CreateUserRequestModel model)
         {
-            user.Status = AccountStatus.ACTIVE;
-            user.LibraryIdentificationNumber = new Guid().ToString();
-            user.UserType = UserType.LibraryUser;
-            return _userRepository.AddUser(user);
+            var user = new User
+            {
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Country = model.Country,
+                Email = model.Email,
+                PhoneNumber = model.PhoneNumber,
+                Status = AccountStatus.ACTIVE,
+                UserType = UserType.LibraryUser,
+                LibraryIdentificationNumber = Guid.NewGuid().ToString().Substring(0, 5).ToUpper(),
+                University = model.University,
+                PasswordHash = model.PasswordHash
+            };
+            
+            _userRepository.AddUser(user);
+            return new BaseResponse
+            {
+                Status = true,
+                Message = "User successfully registered"
+            };
         }
 
         public User RegisterLibrarian(User user)
         {
 
-            user.LibrarianIdentificationNumber = new Guid().ToString();
+            user.LibrarianIdentificationNumber = Guid.NewGuid().ToString().Substring(0, 5).ToUpper();
             return _userRepository.AddUser(user);
         }
 
@@ -64,13 +94,42 @@ namespace Library.Domain.Services
             _userRepository.Delete(id);
         }
 
-        public User UpdateUser(int id, UserUpdateDTO model)
+        public BaseResponse UpgrageLibraryUser(int id, UpgradeLibraryUserRequestModel model)
+        {
+            var user = _userRepository.GetUser(id);
+
+            user.UserType = model.UserType;
+            _userRepository.UpdateUser(user);
+            return new BaseResponse
+            {
+                Status = true,
+                Message = "Succesfully updated"
+            };
+        }
+
+        public BaseResponse UpdateUserStatus(int id, UpdateUserStatusRequestModel model)
+        {
+            var user = _userRepository.GetUser(id);
+            user.Status = model.Status;
+            _userRepository.UpdateUser(user);
+            return new BaseResponse
+            {
+                Status = true,
+                Message = "Succesfully updated"
+            };
+        }
+       /* public BaseResponse UpdateUser(int id, UserUpdateDTO model)
         {
             var user = _userRepository.GetUser(id);
             user.Status = model.Status;
             user.UserType = model.UserType;
-            return _userRepository.UpdateUser(user);
-        }
+            _userRepository.UpdateUser(user);
+            return new BaseResponse
+            {
+                Status = true,
+                Message = "Succesfully updated"
+            };
+        }*/
     }
 
 }

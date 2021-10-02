@@ -10,13 +10,17 @@ namespace Core.Interfaces.Services
 {
     public interface IUserService
     {
-        public User GetUser(int id);
+        public UserModel GetUser(int id);
 
         public User GetUserByEmail(string email);
 
-        public User RegisterUser(User user);
+        public BaseResponse RegisterUser(CreateUserRequestModel model);
 
-        public User UpdateUser(int id, UserUpdateDTO model);
+        public BaseResponse UpdateUserStatus(int id, UpdateUserStatusRequestModel model);
+
+        public BaseResponse UpgrageLibraryUser(int id, UpgradeLibraryUserRequestModel model);
+
+        //public BaseResponse UpdateUser(int id, UserUpdateDTO model);
 
         public void Delete(int id);
 

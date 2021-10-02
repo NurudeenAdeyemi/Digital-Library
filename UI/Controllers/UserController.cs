@@ -54,7 +54,7 @@ namespace UI.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpGet]
+        /*[HttpGet]
         public IActionResult Edit(int id)
         {
             var user = _userService.GetUser(id);
@@ -71,8 +71,45 @@ namespace UI.Controllers
         {
             _userService.UpdateUser(id, model);
             return RedirectToAction("Index");
+        }*/
+        
+        [HttpGet]
+        public IActionResult UpgradeUser(int id)
+        {
+            var user = _userService.GetUser(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return View(user);
         }
 
+        [HttpPost]
+        public IActionResult UpgradeUser(int id, UpgradeLibraryUserRequestModel model)
+        {
+            _userService.UpgrageLibraryUser(id, model);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult UpdateUser(int id)
+        {
+            var user = _userService.GetUser(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return View(user);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateUser(int id, UpdateUserStatusRequestModel model)
+        {
+            _userService.UpdateUserStatus(id, model);
+            return RedirectToAction("Index");
+        }
         public IActionResult AdminDashboard()
         {
             return View();
@@ -86,9 +123,9 @@ namespace UI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Register(User user)
+        public IActionResult Register(CreateUserRequestModel model)
         {
-            _userService.RegisterUser(user);
+            _userService.RegisterUser(model);
             return RedirectToAction("Index", "Home");
         }
 

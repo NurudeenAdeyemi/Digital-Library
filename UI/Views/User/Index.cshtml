@@ -24,10 +24,19 @@
             <th>
                 @Html.DisplayNameFor(model => model.FirstName)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
 
 
             <th>
-                Edit
+                Update
+            </th>
+            <th>
+                Upgrade
             </th>
             <th>
                 Details
@@ -40,24 +49,33 @@
     <tbody>
         @foreach (var user in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => user.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => user.FirstName)
-                </td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => user.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => user.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => user.UserType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => user.Status)
+            </td>
 
-                <td>
-                    <a asp-action="Edit" asp-route-id="@user.Id">Edit</a>
-                </td>
-                <td>
-                    <a asp-action="Details" asp-route-id="@user.Id">Details</a>
-                </td>
-                <td>
-                    <a asp-action="Delete" asp-route-id="@user.Id">Delete</a>
-                </td>
-            </tr>
+            <td>
+                <a asp-action="UpdateUser" asp-route-id="@user.Id">UpdateStatus</a>
+            </td>
+            <td>
+                <a asp-action="UpgradeUser" asp-route-id="@user.Id">UpgradeUser</a>
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@user.Id">Details</a>
+            </td>
+            <td>
+                <a asp-action="Delete" asp-route-id="@user.Id">Delete</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

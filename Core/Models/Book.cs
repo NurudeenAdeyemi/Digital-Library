@@ -16,14 +16,13 @@ namespace Core.Models
          public string Language { get; set; }
          public int NumberOfPages { get; set; }
         
-         public bool IsAvailable { get; set; }
-
         public decimal Price { get; set; }
 
         public string BookImage { get; set; }
 
         public string BookPDF { get; set; }
-        //public BookStatus Status { get; set; }
+
+        public BookStatus Status { get; set; }
         public DateTime PublicationDate { get; set; }
 
         public List<BookCategory> BookCategories { get; set; } = new List<BookCategory>();

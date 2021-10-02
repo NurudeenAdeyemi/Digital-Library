@@ -30,7 +30,9 @@ namespace Core.Models
 
         public string PasswordHash { get; set; }
 
-       // public string HashSalt { get; set; }
+        public string HashSalt { get; set; }
+
+        // public string HashSalt { get; set; }
 
         public UserType UserType { get; set; }
 

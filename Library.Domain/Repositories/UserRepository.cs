@@ -1,4 +1,5 @@
-﻿using Core.Enums;
+﻿using Core.DTOs;
+using Core.Enums;
 using Core.Interfaces.Repositories;
 using Core.Models;
 using Data;
@@ -28,8 +29,8 @@ namespace Library.Domain.Repositories
 
         public void Delete(int id)
         {
-            var user = GetUser(id);
-            if(user != null)
+            var user = _libraryContext.Users.SingleOrDefault(u => u.Id == id);
+            if (user != null)
             {
                 _libraryContext.Users.Remove(user);
                 _libraryContext.SaveChanges();
@@ -43,7 +44,8 @@ namespace Library.Domain.Repositories
 
         public User GetUser(int id)
         {
-            return _libraryContext.Users.SingleOrDefault(u => u.Id == id);
+            return  _libraryContext.Users.SingleOrDefault(u => u.Id == id);
+           
         }
 
         public User GetUserByEmail(string email)
@@ -66,7 +68,7 @@ namespace Library.Domain.Repositories
             
             _libraryContext.Users.Update(user);
             _libraryContext.SaveChanges();
-            return user;   
+            return user;
         }
     }
 }

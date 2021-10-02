@@ -9,8 +9,8 @@ namespace Core.Enums
     public enum BookStatus
     {
         AVAILABLE = 1,
-        RESERVED,
-        LOANED,
-    
+        FREE,
+        UNAVAILABLE,
+        NOTFREE
     }
 }
