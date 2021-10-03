@@ -1,0 +1,70 @@
+﻿@using Core.Enums
+@model Core.DTOs.BookModel
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Book";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class=" card col-md-6">
+            <div class="card-body ">
+                <div class="bg-light">
+                    <h1 class="tagcolor" style="color:mediumblue">Update Book</h1>
+                    <p class="tagcolor" style="color:mediumblue">Please fill in this form to update a book.</p>
+                    <hr class="tagcolor" style="color:mediumblue">
+
+                </div>
+                <form asp-action="Update">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    
+                    
+                    <div class="form-row">
+                        <div class="form-group col-sm-6">
+                            <label asp-for="Status" class="control-label"></label>
+                            <select asp-for="Status" class="form-control">
+                                Select User Type
+                                <option value="@BookStatus.AVAILABLE"> Available</option>
+                                <option value="@BookStatus.UNAVAILABLE"> Unavailable</option>
+                                <option value="@BookStatus.FREE"> Free</option>
+                                <option value="@BookStatus.NOTFREE"> Not Free</option>
+                            </select>
+                            <span asp-validation-for="Status" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label asp-for="Price" class="control-label"></label>
+                            <input asp-for="Price" class="form-control" />
+                            <span asp-validation-for="Price" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-sm-6">
+                            <label asp-for="BookImage" class="control-label"></label>
+                            <input asp-for="BookImage" class="form-control" />
+                            <span asp-validation-for="BookImage" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label asp-for="BookPDF" class="control-label"></label>
+                            <input asp-for="BookPDF" class="form-control" />
+                            <span asp-validation-for="BookPDF" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group ">
+                        <input href="#myModal" type="submit" value="Submit" class="btn btn-success trigger-btn col-sm-12" data-toggle="modal" />
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

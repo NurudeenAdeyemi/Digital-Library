@@ -33,6 +33,8 @@ namespace UI
             services.AddControllersWithViews();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IBookRepository, BookRepository>();
+            services.AddScoped<IBookService, BookService>();
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(config =>

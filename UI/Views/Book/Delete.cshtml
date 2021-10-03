@@ -1,0 +1,55 @@
+﻿@model Core.DTOs.BookModel
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Admin";
+}
+
+<h1>Are you sure you want to delete this Book?</h1>
+<div style="font-size: 130%;">
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Title
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Subject)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Subject)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NumberOfPages)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NumberOfPages)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Publisher)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Publisher)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

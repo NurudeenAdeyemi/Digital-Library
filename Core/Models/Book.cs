@@ -21,8 +21,8 @@ namespace Core.Models
         public string BookImage { get; set; }
 
         public string BookPDF { get; set; }
-
-        public BookStatus Status { get; set; }
+        public BookAvailabilityStatus AvailabilityStatus { get; set; }
+        public BookAccessibilityStatus AccessibilityStatus { get; set; }
         public DateTime PublicationDate { get; set; }
 
         public List<BookCategory> BookCategories { get; set; } = new List<BookCategory>();
