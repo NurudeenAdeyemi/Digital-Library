@@ -2,6 +2,7 @@
 using Core.Enums;
 using Core.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +13,14 @@ namespace UI.Controllers
     public class BookController : Controller
     {
         private IBookService _bookService;
+        private IAuthorService _authorService;
+        private ICategoryService _categoryService;
 
-        public BookController(IBookService bookService)
+        public BookController(IBookService bookService, ICategoryService categoryService, IAuthorService authorService)
         {
             _bookService = bookService;
+            _authorService = authorService;
+            _categoryService = categoryService;
         }
         public IActionResult Index()
         {
@@ -25,6 +30,11 @@ namespace UI.Controllers
 
         public IActionResult Add()
         {
+            var authors = _authorService.GetAuthors();
+            ViewData["Authors"] = new SelectList(authors, "Id", "FirstName");
+            var categories = _categoryService.GetCategories();
+            ViewData["Categories"] = new SelectList(categories, "Id", "Name");
+
             return View();
         }
 

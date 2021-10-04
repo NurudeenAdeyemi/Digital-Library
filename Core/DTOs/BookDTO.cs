@@ -27,9 +27,9 @@ namespace Core.DTOs
         public BookAccessibilityStatus AccessibilityStatus { get; set; }
         public DateTime PublicationDate { get; set; }
 
-        public List<Category> BookCategories { get; set; } = new List<Category>();
+        public List<CategoryModel> BookCategories { get; set; } = new List<CategoryModel>();
 
-        public List<Author> Authors { get; set; } = new List<Author>();
+        public List<AuthorModel> Authors { get; set; } = new List<AuthorModel>();
     }
 
     public class CreateBookRequestModel
@@ -47,6 +47,9 @@ namespace Core.DTOs
         public BookAvailabilityStatus AvailabilityStatus { get; set; }
         public BookAccessibilityStatus AccessibilityStatus { get; set; }
         public DateTime PublicationDate { get; set; }
+        public IList<int> Categories { get; set; } = new List<int>();
+
+        public IList<int> Authors { get; set; } = new List<int>();
     }
 
     public class UpdateBookRequestModel

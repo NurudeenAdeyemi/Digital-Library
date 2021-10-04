@@ -45,6 +45,7 @@ namespace Library.Domain.Services
             var author = _authorRepository.GetAuthor(id);
             return new AuthorModel
             {
+                Id = author.Id,
                 FirstName = author.FirstName,
                 LastName = author.LastName,
                 Biography = author.Biography

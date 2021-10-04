@@ -1,4 +1,5 @@
 ﻿@using Core.Enums
+@using Core.DTOs
 @model Core.DTOs.CreateBookRequestModel
 
 @{
@@ -78,7 +79,7 @@
                             <span asp-validation-for="BookPDF" class="text-danger"></span>
                         </div>
                     </div>
-                   
+
 
                     <div class="form-row">
                         <div class="form-group col-sm-6">
@@ -100,11 +101,24 @@
                             <span asp-validation-for="AvailabilityStatus" class="text-danger"></span>
                         </div>
                     </div>
-
-
-                    <div class="form-group ">
-                        <input href="#myModal" type="submit" value="Submit" class="btn btn-success trigger-btn col-sm-12" data-toggle="modal" />
+                    <div class="form-row">
+                        <div class="col-md-6" style="margin-top: 20px; font-size: larger; font-weight: bold; color: darkcyan">
+                            <label asp-for="Authors" class="control-label"></label>
+                            <select asp-for="Authors" class="form-control" asp-items="ViewBag.Authors" required>
+                                <option value="">--Select Author--</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6" style="margin-top: 20px; font-size: larger; font-weight: bold; color: darkcyan">
+                            <label asp-for="Categories" class="control-label"></label>
+                            <select asp-for="Categories" class="form-control" asp-items="ViewBag.Categories" required>
+                                <option value="">--Select Author--</option>
+                            </select>
+                        </div>
                     </div>
+
+                        <div class="form-group ">
+                            <input href="#myModal" type="submit" value="Submit" class="btn btn-success trigger-btn col-sm-12" data-toggle="modal" />
+                        </div>
                 </form>
             </div>
         </div>

@@ -13,11 +13,15 @@ namespace Library.Domain.Services
 {
     public class BookService : IBookService
     {
+        private readonly ICategoryRepository _categoryRepository;
+        private readonly IAuthorRepository _authorRepository;
         private readonly IBookRepository _bookRepository;
 
-        public BookService(IBookRepository bookRepository)
+        public BookService(IBookRepository bookRepository, IAuthorRepository authorRepository, ICategoryRepository categoryRepository)
         {
             _bookRepository = bookRepository;
+            _authorRepository = authorRepository;
+            _categoryRepository = categoryRepository;
         }
         public BaseResponse AddBook(CreateBookRequestModel model)
         {
@@ -34,9 +38,36 @@ namespace Library.Domain.Services
                 Price = model.Price,
                 AvailabilityStatus = model.AvailabilityStatus,
                 AccessibilityStatus = model.AccessibilityStatus,
-                Subject = model.Subject,
-                Title = model.Title // List of Authors and Categories yet to be added
+                Subject = model.Subject,              
+                Title = model.Title  
             };
+
+            var authors = _authorRepository.GetAuthors();
+            foreach (var author in authors)
+            {
+                var bookAuthor = new BookAuthor
+                {
+                    Book = book,
+                    BookId = book.Id,
+                    Author = author,
+                    AuthorId = author.Id
+                };
+
+                book.BookAuthors.Add(bookAuthor);
+            }
+
+            var categories = _categoryRepository.GetCategories();
+            foreach(var category in categories)
+            {
+                var bookCategory = new BookCategory
+                {
+                    Book = book,
+                    BookId = book.Id,
+                    Category = category,
+                    CategoryId = category.Id
+                };
+                book.BookCategories.Add(bookCategory);
+            }
 
             _bookRepository.AddBook(book);
             return new BaseResponse
@@ -67,11 +98,17 @@ namespace Library.Domain.Services
                 AvailabilityStatus = book.AvailabilityStatus,
                 Publisher = book.Publisher,
                 PublicationDate = book.PublicationDate,
-                Authors = book.BookAuthors.Select(a => new Author()
+                Authors = book.BookAuthors.Select(a => new AuthorModel()
                 {
+                    Id = a.AuthorId,
                     FirstName = a.Author.FirstName,
                     LastName = a.Author.LastName,
                     Biography = a.Author.Biography
+                }).ToList(),
+                BookCategories = book.BookCategories.Select(a => new CategoryModel()
+                {
+                    Id = a.CategoryId,
+                    Name = a.Category.Name,
                 }).ToList()
             };
         }
@@ -95,7 +132,7 @@ namespace Library.Domain.Services
                 AvailabilityStatus = book.AvailabilityStatus,
                 Publisher = book.Publisher,
                 PublicationDate = book.PublicationDate,
-                Authors = book.BookAuthors.Select(a => new Author()
+                Authors = book.BookAuthors.Select(a => new AuthorModel()
                 {
                     FirstName = a.Author.FirstName,
                     LastName = a.Author.LastName,
@@ -121,7 +158,7 @@ namespace Library.Domain.Services
                 AvailabilityStatus = b.AvailabilityStatus,
                 Publisher = b.Publisher,
                 PublicationDate = b.PublicationDate,
-                Authors = b.BookAuthors.Select(a => new Author(){
+                Authors = b.BookAuthors.Select(a => new AuthorModel(){
                     FirstName = a.Author.FirstName,
                     LastName = a.Author.LastName,
                     Biography = a.Author.Biography
