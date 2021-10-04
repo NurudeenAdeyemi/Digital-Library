@@ -28,7 +28,10 @@
                 @Html.DisplayNameFor(model => model.Language)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Status)
+                @Html.DisplayNameFor(model => model.AvailabilityStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AccessibilityStatus)
             </th>
             <th>
                 Update
@@ -55,7 +58,10 @@
                 @Html.DisplayFor(modelItem => book.Language)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => book.Status)
+                @Html.DisplayFor(modelItem => book.AvailabilityStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => book.AccessibilityStatus)
             </td>
 
             <td>

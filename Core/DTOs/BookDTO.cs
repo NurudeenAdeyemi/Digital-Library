@@ -27,7 +27,6 @@ namespace Core.DTOs
         public BookAccessibilityStatus AccessibilityStatus { get; set; }
         public DateTime PublicationDate { get; set; }
 
-
         public List<Category> BookCategories { get; set; } = new List<Category>();
 
         public List<Author> Authors { get; set; } = new List<Author>();
@@ -42,9 +41,7 @@ namespace Core.DTOs
         public string Language { get; set; }
         public int NumberOfPages { get; set; }
         public decimal Price { get; set; }
-
         public string BookImage { get; set; }
-
         public string BookPDF { get; set; }
 
         public BookAvailabilityStatus AvailabilityStatus { get; set; }

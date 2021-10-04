@@ -111,9 +111,15 @@ namespace UI.Controllers
             return View(books);
         }
 
-        public IActionResult GetBooksByStatus(BookAvailabilityStatus status)
+        public IActionResult GetBooksBylabilityAvaiStatus(BookAvailabilityStatus status)
         {
-            var books = _bookService.GetBooksByStatus(status);
+            var books = _bookService.GetBooksByAvailabilityStatus(status);
+            return View(books);
+        }
+
+        public IActionResult GetBooksByAccessibilityStatus(BookAccessibilityStatus status)
+        {
+            var books = _bookService.GetBooksByAccessibilityStatus(status);
             return View(books);
         }
 

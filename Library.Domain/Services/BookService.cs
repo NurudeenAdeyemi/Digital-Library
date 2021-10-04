@@ -152,10 +152,16 @@ namespace Library.Domain.Services
             return _bookRepository.GetBooksByPublisher(publisher);
         }
 
-        public IList<Book> GetBooksByStatus(BookAvailabilityStatus status)
+        public IList<Book> GetBooksByAvailabilityStatus(BookAvailabilityStatus status)
         {
-            return _bookRepository.GetBooksByStatus(status);
+            return _bookRepository.GetBooksByAvailabilityStatus(status);
         }
+
+        public IList<Book> GetBooksByAccessibilityStatus(BookAccessibilityStatus status)
+        {
+            return _bookRepository.GetBooksByAccessibilityStatus(status);
+        }
+
 
         public void RemoveBook(int id)
         {
