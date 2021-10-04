@@ -1,4 +1,5 @@
-﻿using Core.Enums;
+﻿using Core.DTOs;
+using Core.Enums;
 using Core.Models;
 using System;
 using System.Collections.Generic;
@@ -6,15 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Interfaces.Repositories
+namespace Core.Interfaces.Services
 {
-    public interface IBookRepository
+    public interface IBookService
     {
-        public Book GetBook(int id);
+        public BookModel GetBook(int id);
 
-        public Book GetBookByTitle(string title);
+        public BookModel GetBookByTitle(string title);
 
-        public IList<Book> GetBooks();
+        public IList<BookModel> GetBooks();
 
         public IList<Book> GetBooksByPublicationDate(DateTime publicationDate);
 
@@ -28,9 +29,9 @@ namespace Core.Interfaces.Repositories
 
         public IList<Book> GetBooksByAccessibilityStatus(BookAccessibilityStatus status);
 
-        public Book AddBook(Book book);
+        public BaseResponse AddBook(CreateBookRequestModel model);
 
-        public Book UpdateBook(Book book);
+        public BaseResponse UpdateBook(int id, UpdateBookRequestModel model);
 
         public void RemoveBook(int id);
     }

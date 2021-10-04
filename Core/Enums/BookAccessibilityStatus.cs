@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace Core.Enums
 {
-    public enum BookStatus
+    public enum BookAccessibilityStatus
     {
-        AVAILABLE = 1,
-        FREE,
-        UNAVAILABLE,
+        FREE = 1,
         NOTFREE
     }
 }

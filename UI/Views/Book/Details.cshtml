@@ -1,0 +1,111 @@
+﻿@model Core.DTOs.BookModel
+
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Details";
+}
+
+<dl class="row">
+    <dt class="col-sm-2">
+        Title:
+    </dt>
+    <dd class="col-sm-10">
+        @Model.Title
+    </dd>
+    <dt class="col-sm-2">
+        Subject:
+    </dt>
+    <dd class="col-sm-10">
+        @Model.Subject
+    </dd>
+    <dt class="col-sm-2">
+        Language:
+    </dt>
+    <dd class="col-sm-10">
+        @Model.Language
+    </dd>
+    <dt class="col-sm-2">
+        Publisher:
+    </dt>
+    <dd class="col-sm-10">
+        @Model.Publisher
+    </dd>
+    <dt class="col-sm-2">
+        Number of Pages:
+    </dt>
+    <dd class="col-sm-10">
+        @Model.NumberOfPages
+    </dd>
+    <dt class="col-sm-2">
+        Price:
+    </dt>
+    <dd class="col-sm-10">
+        @Model.Price
+    </dd>
+    <dt class="col-sm-2">
+        Availability Status:
+    </dt>
+    <dd class="col-sm-10">
+        @Model.AvailabilityStatus
+    </dd>
+    <dt class="col-sm-2">
+        Accessibility Status:
+    </dt>
+    <dd class="col-sm-10">
+        @Model.AccessibilityStatus
+    </dd>
+    <dt class="col-sm-2">
+        ISBN:
+    </dt>
+    <dd class="col-sm-10">
+        @Model.ISBN
+    </dd>
+    <dt class="col-sm-2">
+        Publication Date:
+    </dt>
+    <dd class="col-sm-10">
+        @Model.PublicationDate
+    </dd>
+
+    <dt class="col-sm-2">
+        Book Image:
+    </dt>
+    <dd class="col-sm-10">
+        @Model.BookImage
+    </dd>
+    <dt class="col-sm-2">
+        Book PDF:
+    </dt>
+    <dd class="col-sm-10">
+        @Model.BookPDF
+    </dd>
+
+
+    @foreach (var author in Model.Authors)
+    {
+        <dt class="col-sm-2">
+            FirstName:
+        </dt>
+        <dd class="col-sm-10">
+            @author.FirstName
+        </dd>
+        <dt class="col-sm-2">
+            LastName:
+        </dt>
+        <dd class="col-sm-10">
+            @author.LastName
+        </dd>
+        <dt class="col-sm-2">
+            Biography:
+        </dt>
+        <dd class="col-sm-10">
+            @author.Biography
+        </dd>
+    }
+
+
+
+</dl>
+
+<button style="background-color:darkblue;"><a asp-action="Index">Back to List</a></button>

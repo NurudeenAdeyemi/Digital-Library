@@ -23,17 +23,17 @@ namespace Core.DTOs
 
         public string BookPDF { get; set; }
 
-        public BookStatus Status { get; set; }
+        public BookAvailabilityStatus AvailabilityStatus { get; set; }
+        public BookAccessibilityStatus AccessibilityStatus { get; set; }
         public DateTime PublicationDate { get; set; }
 
-        public List<BookCategory> BookCategories { get; set; } = new List<BookCategory>();
+        public List<Category> BookCategories { get; set; } = new List<Category>();
 
-        public List<BookAuthor> BookAuthors { get; set; } = new List<BookAuthor>();
+        public List<Author> Authors { get; set; } = new List<Author>();
     }
 
     public class CreateBookRequestModel
     {
-        public int Id { get; set; }
         public string ISBN { get; set; }
         public string Title { get; set; }
         public string Subject { get; set; }
@@ -41,12 +41,11 @@ namespace Core.DTOs
         public string Language { get; set; }
         public int NumberOfPages { get; set; }
         public decimal Price { get; set; }
-
         public string BookImage { get; set; }
-
         public string BookPDF { get; set; }
 
-        public BookStatus Status { get; set; }
+        public BookAvailabilityStatus AvailabilityStatus { get; set; }
+        public BookAccessibilityStatus AccessibilityStatus { get; set; }
         public DateTime PublicationDate { get; set; }
     }
 
@@ -58,7 +57,8 @@ namespace Core.DTOs
 
         public string BookPDF { get; set; }
 
-        public BookStatus Status { get; set; }
+        public BookAvailabilityStatus AvailabilityStatus { get; set; }
+        public BookAccessibilityStatus AccessibilityStatus { get; set; }
 
     }
 

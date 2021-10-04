@@ -1,0 +1,81 @@
+﻿
+@model IEnumerable<Core.DTOs.BookModel>
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Books";
+}
+
+
+
+    <div class="card-header" style="background-color:darkcyan; color:white;">
+        <div class="card-title">
+            <h1 class="text-center">Books</h1>
+        </div>
+    </div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Authors)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Language)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AvailabilityStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AccessibilityStatus)
+            </th>
+            <th>
+                Update
+            </th>
+            <th>
+                Details
+            </th>
+            <th>
+                Delete
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var book in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => book.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => book.Authors)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => book.Language)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => book.AvailabilityStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => book.AccessibilityStatus)
+            </td>
+
+            <td>
+                <a asp-action="Update" asp-route-id="@book.Id">Update</a>
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@book.Id">Details</a>
+            </td>
+            <td>
+                <a asp-action="Delete" asp-route-id="@book.Id">Delete</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+<p style="margin-top: 10px;"><button type="button" style="padding:4px 8px; color: white; border-radius: 8px; background-color:darkcyan;"><a asp-controller="Book" asp-action="Add" style="color:white; text-decoration:none;">Add Book</a></button></p>
