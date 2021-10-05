@@ -72,13 +72,14 @@
         Book Image:
     </dt>
     <dd class="col-sm-10">
-        @Model.BookImage
+        <img class="card-img" style="height:200px; width:200px" src="~/bookImages/@Model.BookImage" />
     </dd>
     <dt class="col-sm-2">
         Book PDF:
     </dt>
     <dd class="col-sm-10">
-        @Model.BookPDF
+        @*<img class="card-img" style="height:200px; width:200px" src="~/bookPDFs/@Model.BookPDF" />*@
+        <a href="~/bookPDFs/@Model.BookPDF" download="@Model.BookPDF"><input class="btn btn-outline-primary" type="button" value="Download book PDF" /></a>
     </dd>
 
 

@@ -11,6 +11,8 @@ namespace Core.Interfaces.Repositories
     {
         public Category GetCategory(int id);
 
+        public IEnumerable<Category> GetSelectedCategories(IList<int> ids);
+
         public IList<Category> GetCategories();
 
         public Category UpdateCategory(Category category);

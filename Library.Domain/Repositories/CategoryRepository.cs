@@ -24,6 +24,11 @@ namespace Library.Domain.Repositories
             _libraryContext.SaveChanges();
             return category;
         }
+        public IEnumerable<Category> GetSelectedCategories(IList<int> ids)
+        {
+            return _libraryContext.Categories
+                .Where(e => ids.Contains(e.Id)).ToList();
+        }
 
         public void DeleteCategory(int id)
         {
