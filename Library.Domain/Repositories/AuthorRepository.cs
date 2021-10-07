@@ -23,6 +23,12 @@ namespace Library.Domain.Repositories
             return _libraryContext.Authors.SingleOrDefault(a => a.Id == id);
         }
 
+        public IEnumerable<Author> GetSelectedAuthors(IList<int> ids)
+        {
+            return _libraryContext.Authors
+                .Where(e => ids.Contains(e.Id)).ToList();
+        }
+
         public Author AddAuthor(Author author)
         {
             _libraryContext.Authors.Add(author);

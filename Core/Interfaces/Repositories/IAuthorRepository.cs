@@ -10,6 +10,9 @@ namespace Core.Interfaces.Repositories
     public interface IAuthorRepository
     {
         public Author GetAuthor(int id);
+
+        public IEnumerable<Author> GetSelectedAuthors(IList<int> ids);
+
         public IList<Author> GetAuthors();
 
         public Author UpdateAuthor(Author author);

@@ -42,7 +42,7 @@ namespace Library.Domain.Services
                 Title = model.Title  
             };
 
-            var authors = _authorRepository.GetAuthors();
+            var authors = _authorRepository.GetSelectedAuthors(model.Authors);
             foreach (var author in authors)
             {
                 var bookAuthor = new BookAuthor
@@ -56,7 +56,7 @@ namespace Library.Domain.Services
                 book.BookAuthors.Add(bookAuthor);
             }
 
-            var categories = _categoryRepository.GetCategories();
+            var categories = _categoryRepository.GetSelectedCategories(model.Categories);
             foreach(var category in categories)
             {
                 var bookCategory = new BookCategory
@@ -137,6 +137,11 @@ namespace Library.Domain.Services
                     FirstName = a.Author.FirstName,
                     LastName = a.Author.LastName,
                     Biography = a.Author.Biography
+                }).ToList(),
+                BookCategories = book.BookCategories.Select(a => new CategoryModel()
+                {
+                    Id = a.CategoryId,
+                    Name = a.Category.Name,
                 }).ToList()
             };
         }
@@ -162,8 +167,13 @@ namespace Library.Domain.Services
                     FirstName = a.Author.FirstName,
                     LastName = a.Author.LastName,
                     Biography = a.Author.Biography
+                }).ToList(),
+                BookCategories = b.BookCategories.Select(a => new CategoryModel()
+                {
+                    Id = a.CategoryId,
+                    Name = a.Category.Name,
                 }).ToList()
-                   
+
             }).ToList();
 
             return books;    

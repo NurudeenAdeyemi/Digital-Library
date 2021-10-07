@@ -1,10 +1,13 @@
 ﻿using Core.DTOs;
 using Core.Enums;
 using Core.Interfaces.Services;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,15 +15,18 @@ namespace UI.Controllers
 {
     public class BookController : Controller
     {
-        private IBookService _bookService;
-        private IAuthorService _authorService;
-        private ICategoryService _categoryService;
+        private  readonly IBookService _bookService;
+        private readonly IAuthorService _authorService;
+        private readonly ICategoryService _categoryService;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public BookController(IBookService bookService, ICategoryService categoryService, IAuthorService authorService)
+
+        public BookController(IBookService bookService, ICategoryService categoryService, IAuthorService authorService, IWebHostEnvironment webHostEnvironment)
         {
             _bookService = bookService;
             _authorService = authorService;
             _categoryService = categoryService;
+            _webHostEnvironment = webHostEnvironment;
         }
         public IActionResult Index()
         {
@@ -39,8 +45,35 @@ namespace UI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(CreateBookRequestModel model)
+        public IActionResult Add(CreateBookRequestModel model, IFormFile file, IFormFile pdf)
         {
+            if(file != null)
+            {
+                string imageDirectory = Path.Combine(_webHostEnvironment.WebRootPath, "bookImages");
+                Directory.CreateDirectory(imageDirectory);
+                string contentType = file.ContentType.Split('/')[1];
+                string bookImage = $"{Guid.NewGuid()}.{contentType}";
+                string fullPath = Path.Combine(imageDirectory, bookImage);
+                using (var fileStream = new FileStream(fullPath, FileMode.Create))
+                {
+                    file.CopyTo(fileStream);
+                }
+                model.BookImage = bookImage;
+            }
+            if (pdf != null)
+            {
+                string pdfDirectory = Path.Combine(_webHostEnvironment.WebRootPath, "bookPDFs");
+                Directory.CreateDirectory(pdfDirectory);
+                string contentType = pdf.ContentType.Split('/')[1];
+                string bookPDF = $"{Guid.NewGuid()}.{contentType}";
+                string fullPath = Path.Combine(pdfDirectory, bookPDF);
+                using (var fileStream = new FileStream(fullPath, FileMode.Create))
+                {
+                    pdf.CopyTo(fileStream);
+                }
+                model.BookPDF = bookPDF;
+            }
+
             _bookService.AddBook(model);
             return RedirectToAction("Index");
         }

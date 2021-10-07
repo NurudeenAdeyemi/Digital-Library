@@ -17,4 +17,9 @@
     <ProjectReference Include="..\Library.Domain\Library.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\bookImages\" />
+    <Folder Include="wwwroot\bookPDFs\" />
+  </ItemGroup>
+
 </Project>
