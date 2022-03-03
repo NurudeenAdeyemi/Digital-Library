@@ -161,7 +161,6 @@ namespace UI.Controllers
         [AllowAnonymous]
         public IActionResult Login(string email, string password)
         {
-
             var user = _userService.Login(email, password);
             if (user == null)
             {

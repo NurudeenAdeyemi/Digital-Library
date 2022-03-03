@@ -26,7 +26,7 @@ namespace Library.Domain.Repositories
         public IEnumerable<Author> GetSelectedAuthors(IList<int> ids)
         {
             return _libraryContext.Authors
-                .Where(e => ids.Contains(e.Id)).ToList();
+                .Where(e => ids.Contains(e.Id)).Distinct().ToList();
         }
 
         public Author AddAuthor(Author author)

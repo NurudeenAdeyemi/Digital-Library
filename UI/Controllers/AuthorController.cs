@@ -69,7 +69,7 @@ namespace UI.Controllers
             return View(author);
         }
 
-        [HttpPost , ActionName("Delete")]
+        [HttpPost, ActionName("Delete")]
         public IActionResult DeleteConfirmed(int id)
         {
             _authorService.DeleteAuthor(id);

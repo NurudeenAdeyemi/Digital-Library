@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Library.Domain.Services
 {
-    public class BookService : IBookService
+    public class BookService : IBookService   
     {
         private readonly ICategoryRepository _categoryRepository;
         private readonly IAuthorRepository _authorRepository;
@@ -39,7 +39,8 @@ namespace Library.Domain.Services
                 AvailabilityStatus = model.AvailabilityStatus,
                 AccessibilityStatus = model.AccessibilityStatus,
                 Subject = model.Subject,              
-                Title = model.Title  
+                Title = model.Title 
+                
             };
 
             var authors = _authorRepository.GetSelectedAuthors(model.Authors);
@@ -54,7 +55,7 @@ namespace Library.Domain.Services
                 };
 
                 book.BookAuthors.Add(bookAuthor);
-            }
+            } 
 
             var categories = _categoryRepository.GetSelectedCategories(model.Categories);
             foreach(var category in categories)
@@ -75,19 +76,16 @@ namespace Library.Domain.Services
                 Status = true,
                 Message = "Book successfully added"
             };
-            
-
         }
 
         public BookModel GetBook(int id)
-        {
+        { 
             var book = _bookRepository.GetBook(id);
 
             return new BookModel
             {
                 Title = book.Title,
-                ISBN = book.ISBN,
-           
+                ISBN = book.ISBN,     
                 Subject = book.Subject,
                 BookPDF = book.BookPDF,
                 Language = book.Language,
